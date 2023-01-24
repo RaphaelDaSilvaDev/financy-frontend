@@ -13,6 +13,7 @@ import { SigninApi } from "./services";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { AuthToken } from "../../services/authToken";
+import { Wrapper } from "../../components/Page/styles";
 
 export function Signin() {
   const [cookies, setCookies] = useCookies(["user"]);
@@ -55,49 +56,56 @@ export function Signin() {
 
   return (
     <Page>
-      <S.Container>
-        <S.Hero>
-          <S.Logo>
-            <img src={Logo} alt="" />
-            <h1>Financy App</h1>
-          </S.Logo>
-          <S.SloganContainer>
-            <span>Crie metas, organize seu dinheiro e gerencie seu futuro</span>
-          </S.SloganContainer>
-        </S.Hero>
+      <Wrapper>
+        <S.Container>
+          <S.Hero>
+            <S.Logo>
+              <img src={Logo} alt="" />
+              <h1>Financy App</h1>
+            </S.Logo>
+            <S.SloganContainer>
+              <span>Crie metas, organize seu dinheiro e gerencie seu futuro</span>
+            </S.SloganContainer>
+          </S.Hero>
 
-        <FormProvider {...methods}>
-          <S.LoginContainer onSubmit={methods.handleSubmit(handleSignin, onHandleSigninError)}>
-            <h2>Crie uma nova conta</h2>
-            <S.InputsContainer>
-              <Input label="Nome" placeHolder="Digite seu nome" type="text" registerValue="name" />
-              <Input
-                label="Email"
-                placeHolder="Digite seu email"
-                type="email"
-                registerValue="email"
-              />
-              <Input
-                label="Senha"
-                placeHolder="Digite sua senha"
-                type="password"
-                registerValue="password"
-              />
+          <FormProvider {...methods}>
+            <S.LoginContainer onSubmit={methods.handleSubmit(handleSignin, onHandleSigninError)}>
+              <h2>Crie uma nova conta</h2>
+              <S.InputsContainer>
+                <Input
+                  label="Nome"
+                  placeHolder="Digite seu nome"
+                  type="text"
+                  registerValue="name"
+                />
+                <Input
+                  label="Email"
+                  placeHolder="Digite seu email"
+                  type="email"
+                  registerValue="email"
+                />
+                <Input
+                  label="Senha"
+                  placeHolder="Digite sua senha"
+                  type="password"
+                  registerValue="password"
+                />
 
-              <S.Terms>
-                <CheckBoxInput label="Aceito os" registerValue="terms" />
-                <a href="">Termos de uso</a>
-              </S.Terms>
+                <S.Terms>
+                  <CheckBoxInput label="Aceito os" registerValue="terms" />
+                  <a href="">Termos de uso</a>
+                </S.Terms>
 
-              <Button text="Criar conta" />
-            </S.InputsContainer>
+                <Button text="Criar conta" />
+              </S.InputsContainer>
 
-            <span>
-              Já tem uma conta? <Link to="/login"> Entre com ela</Link>
-            </span>
-          </S.LoginContainer>
-        </FormProvider>
-      </S.Container>
+              <span>
+                Já tem uma conta? <Link to="/login"> Entre com ela</Link>
+              </span>
+            </S.LoginContainer>
+          </FormProvider>
+        </S.Container>
+      </Wrapper>
     </Page>
   );
 }

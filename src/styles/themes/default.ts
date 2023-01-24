@@ -14,6 +14,9 @@ export const defaultTheme = {
     placeholder: "#999999",
     "button-text": "#F5F5F5",
 
+    danger: "#DE2B2B",
+    "danger-light": "#E34F4F",
+
     black: "#000",
   },
   dark: {
@@ -30,6 +33,9 @@ export const defaultTheme = {
 
     placeholder: "#999999",
     "button-text": "#F5F5F5",
+
+    danger: "#DE2B2B",
+    "danger-light": "#E34F4F",
 
     black: "#000",
   },

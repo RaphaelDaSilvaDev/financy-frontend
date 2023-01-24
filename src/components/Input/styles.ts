@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const InputContainer = styled.div`
   width: 100%;
-
   & > label {
     width: 100%;
     display: flex;
@@ -22,6 +21,7 @@ export const InputContainer = styled.div`
       ::placeholder {
         color: ${(props) => props.theme.placeholder};
       }
+      transition: all 0.5s ease;
     }
   }
 `;
