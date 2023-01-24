@@ -6,9 +6,5 @@ interface PageProps {
 }
 
 export function Page({ children }: PageProps) {
-  return (
-    <S.Page>
-      <S.Wrapper>{children}</S.Wrapper>
-    </S.Page>
-  );
+  return <S.Page>{children}</S.Page>;
 }

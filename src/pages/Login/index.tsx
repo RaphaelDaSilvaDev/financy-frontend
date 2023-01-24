@@ -12,6 +12,7 @@ import axios from "axios";
 import { AuthenticationApi } from "./service";
 import { useCookies } from "react-cookie";
 import { AuthToken } from "../../services/authToken";
+import { Wrapper } from "../../components/Page/styles";
 
 export function Login() {
   const [cookies, setCookies] = useCookies(["user"]);
@@ -51,38 +52,40 @@ export function Login() {
 
   return (
     <Page>
-      <S.Container>
-        <S.Hero>
-          <S.Logo>
-            <img src={Logo} alt="" />
-            <h1>Financy App</h1>
-          </S.Logo>
-          <S.SloganContainer>
-            <span>Crie metas, organize seu dinheiro e gerencie seu futuro</span>
-          </S.SloganContainer>
-        </S.Hero>
+      <Wrapper>
+        <S.Container>
+          <S.Hero>
+            <S.Logo>
+              <img src={Logo} alt="" />
+              <h1>Financy App</h1>
+            </S.Logo>
+            <S.SloganContainer>
+              <span>Crie metas, organize seu dinheiro e gerencie seu futuro</span>
+            </S.SloganContainer>
+          </S.Hero>
 
-        <FormProvider {...methods}>
-          <S.LoginContainer onSubmit={methods.handleSubmit(handleLogin, onHandleLoginFail)}>
-            <h2>Entrar com sua conta</h2>
-            <S.InputsContainer>
-              <Input label="Email" placeHolder="Digite seu email" registerValue="email" />
-              <Input
-                label="Senha"
-                placeHolder="Digite sua senha"
-                type="password"
-                registerValue="password"
-              />
-              <Button text="Entrar" />
-              <a href="#">Esqueceu a senha?</a>
-            </S.InputsContainer>
+          <FormProvider {...methods}>
+            <S.LoginContainer onSubmit={methods.handleSubmit(handleLogin, onHandleLoginFail)}>
+              <h2>Entrar com sua conta</h2>
+              <S.InputsContainer>
+                <Input label="Email" placeHolder="Digite seu email" registerValue="email" />
+                <Input
+                  label="Senha"
+                  placeHolder="Digite sua senha"
+                  type="password"
+                  registerValue="password"
+                />
+                <Button text="Entrar" />
+                <a href="#">Esqueceu a senha?</a>
+              </S.InputsContainer>
 
-            <span>
-              Ainda não tem uma conta? <Link to="/signin">Crie uma aqui</Link>
-            </span>
-          </S.LoginContainer>
-        </FormProvider>
-      </S.Container>
+              <span>
+                Ainda não tem uma conta? <Link to="/signin">Crie uma aqui</Link>
+              </span>
+            </S.LoginContainer>
+          </FormProvider>
+        </S.Container>
+      </Wrapper>
     </Page>
   );
 }

@@ -1,10 +1,15 @@
 import styled from "styled-components";
 
-export const Container = styled.button`
+interface ContainerProps {
+  typeColor: "normal" | "danger";
+}
+
+export const Container = styled.button<ContainerProps>`
   width: 100%;
   height: 5.6rem;
 
-  background-color: ${(props) => props.theme.primary};
+  background-color: ${(props) =>
+    props.typeColor === "normal" ? props.theme.primary : props.theme.danger};
   color: ${(props) => props.theme["button-text"]};
   cursor: pointer;
 
@@ -13,7 +18,8 @@ export const Container = styled.button`
   outline: 0;
 
   :hover {
-    background-color: ${(props) => props.theme["primary-light"]};
+    background-color: ${(props) =>
+      props.typeColor === "normal" ? props.theme["primary-light"] : props.theme["danger-light"]};};
     transition: background-color 175ms;
   }
 `;

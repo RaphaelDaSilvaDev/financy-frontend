@@ -5,13 +5,16 @@ import { useContext, useState } from "react";
 import { Routes } from "./routes";
 import { ThemeContext } from "./styles/themes/ThemeContext";
 import { Toaster } from "react-hot-toast";
+import { AuthProvider } from "./services/AuthContext";
 
 function App() {
   const { theme } = useContext(ThemeContext);
 
   return (
     <ThemeProvider theme={theme === "dark" ? defaultTheme[theme] : defaultTheme[theme]}>
-      <Routes />
+      <AuthProvider>
+        <Routes />
+      </AuthProvider>
       <Toaster
         toastOptions={{
           style: {

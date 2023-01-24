@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Page = styled.div`
   width: 100%;
-  height: 100vh;
+  height: calc(100vh);
   background-color: ${(props) => props.theme.background};
   color: ${(props) => props.theme.text};
   transition: all 0.5s ease;
