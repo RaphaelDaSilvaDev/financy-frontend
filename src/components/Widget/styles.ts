@@ -24,3 +24,14 @@ export const Header = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
+
+export const HeaderContent = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const SubTitle = styled.span`
+  font-size: 1.4rem;
+  font-weight: 300;
+`;

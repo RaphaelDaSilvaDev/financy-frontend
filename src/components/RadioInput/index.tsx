@@ -1,12 +1,12 @@
 import { useFormContext } from "react-hook-form";
-import { string } from "zod";
-import { defaultTheme } from "../../styles/themes/default";
+import { ColorsInterface } from "../../interfaces/colors";
+
 import * as S from "./styles";
 
 interface RadioInputProps {
   label?: string;
   value: string;
-  color?: "red" | "yellow" | "green" | "primary";
+  color?: ColorsInterface;
   registerValue: string;
   name: string;
 }

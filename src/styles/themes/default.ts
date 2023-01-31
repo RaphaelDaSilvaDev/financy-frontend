@@ -1,9 +1,12 @@
 const otherColors = {
-  red: "#E03616",
-
-  yellow: "#FFBC1F",
-
-  green: "#03DD62",
+  red: "#891515",
+  orange: "#FB8500",
+  yellow: "#FFB703",
+  green: "#9BC53D",
+  purple: "#BCB6FF",
+  "dark-blue": "#044FC8",
+  pink: "#f433ab",
+  gray: "#404E4D",
 
   primary: "#0096CC",
 };

@@ -1,88 +1,116 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import { useEffect, useReducer, useRef, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { CheckBoxInput } from "../../components/CheckBoxInput";
+import { useNavigate } from "react-router-dom";
+import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { Wrapper } from "../../components/Page/styles";
 import { RadioInput } from "../../components/RadioInput";
+import { ToastStyle } from "../../components/Toast/ToastStyle";
 import { Widget } from "../../components/Widget";
-import { CreateGoalSchema, CreateGoalSchemaType } from "./shemas";
+import { SaveBy } from "./components/SaveBy";
+import { TimeToSave } from "./components/TimeToSave";
+import { CreateGoalService, GetAvailablePercentageService } from "./service";
+import { CreateGoalSchema, CreateGoalSchemaType } from "./schemas";
 
 import * as S from "./styles";
 
 export function CreateGoal() {
-  const method = useForm<CreateGoalSchemaType>({
+  const firstRender = useRef(true);
+  const navigation = useNavigate();
+
+  const [availablePercentage, setAvailablePercentage] = useState<number>();
+
+  const methods = useForm<CreateGoalSchemaType>({
     resolver: zodResolver(CreateGoalSchema),
     mode: "onSubmit",
     defaultValues: {
-      incomeType: "percentage",
-      incomeValue: "0",
+      income_type: "percentage",
+      income_value: "0",
+      end_by: "time",
+      color: "red",
     },
   });
 
-  function handleAddGoal() {}
+  async function handleAddGoal() {
+    const values = methods.getValues();
+    try {
+      await CreateGoalService({ ...values });
+      ToastStyle({ message: "Meta criada com sucesso", styleToast: "success" });
+      navigation("/");
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        ToastStyle({ message: error.response?.data.message, styleToast: "error" });
+      }
+    }
+  }
 
-  const value = method.watch("incomeValue");
+  function onHandleAddGoalFail() {
+    const errors = Object.values(methods.formState.errors);
 
-  const size = ((Number(value) - 0) * 100) / (100 - 0) + "% 100%";
+    errors.map((error) => {
+      ToastStyle({ message: error.message ? error.message : "", styleToast: "warning" });
+    });
+  }
+
+  async function getAvailablePercentage() {
+    try {
+      const { data } = await GetAvailablePercentageService();
+      setAvailablePercentage(data);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        ToastStyle({ message: error.response?.data.message, styleToast: "error" });
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (!firstRender.current) {
+      getAvailablePercentage();
+    } else {
+      firstRender.current = false;
+    }
+  }, []);
 
   return (
     <Wrapper>
       <S.Container>
-        <FormProvider {...method}>
-          <Widget title="Adicionar Meta">
-            <Input
-              label="Nome da Meta"
-              placeHolder="Digite o nome da Meta"
-              type="text"
-              registerValue="name"
-            />
-          </Widget>
-
-          <Widget title="Selecionar cor da meta">
-            <S.ColorContent>
-              <RadioInput registerValue="color" color="green" value="green" name="color" />
-              <RadioInput registerValue="color" color="red" value="red" name="color" />
-              <RadioInput registerValue="color" color="yellow" value="yellow" name="color" />
-            </S.ColorContent>
-          </Widget>
-
-          <S.SeparateBy>
-            <Widget title="Separar quantia por">
-              <S.SeparateByContent>
-                <RadioInput
-                  registerValue="incomeType"
-                  value="percentage"
-                  label="Porcentagem"
-                  name="incomeType"
-                />
-                <RadioInput
-                  registerValue="incomeType"
-                  value="amount"
-                  label="Quantia"
-                  name="incomeType"
-                />
-              </S.SeparateByContent>
+        <FormProvider {...methods}>
+          <S.Content onSubmit={methods.handleSubmit(handleAddGoal, onHandleAddGoalFail)}>
+            <Widget title="Adicionar Meta">
+              <Input
+                label="Nome da Meta"
+                placeHolder="Digite o nome da Meta"
+                type="text"
+                registerValue="name"
+              />
             </Widget>
-            {method.watch("incomeType") === "amount" ? (
-              <Widget title="Selecione a quantia para cada entrada">
-                <S.SeparateByValue>
-                  <S.SeparatedByValueBar />
-                  <span>R$</span>
-                  <S.Input type="number" placeholder="250,00" />
-                </S.SeparateByValue>
-              </Widget>
-            ) : (
-              <Widget title="Selecione a porcentagem para cada entrada">
-                <S.SeparatedByPercentage
-                  sizeChange={size}
-                  type="range"
-                  min="0"
-                  max="100"
-                  {...method.register("incomeValue")}
+
+            <Widget title="Selecionar cor da meta">
+              <S.ColorContent>
+                <RadioInput registerValue="color" color="red" value="red" name="color" />
+                <RadioInput registerValue="color" color="orange" value="orange" name="color" />
+                <RadioInput registerValue="color" color="yellow" value="yellow" name="color" />
+                <RadioInput registerValue="color" color="green" value="green" name="color" />
+                <RadioInput registerValue="color" color="purple" value="purple" name="color" />
+                <RadioInput
+                  registerValue="color"
+                  color="dark-blue"
+                  value="dark-blue"
+                  name="color"
                 />
-              </Widget>
-            )}
-          </S.SeparateBy>
+                <RadioInput registerValue="color" color="pink" value="pink" name="color" />
+                <RadioInput registerValue="color" color="gray" value="gray" name="color" />
+              </S.ColorContent>
+            </Widget>
+
+            <SaveBy availablePercentage={availablePercentage} />
+
+            <TimeToSave />
+
+            <Button text="Adicionar meta" />
+          </S.Content>
         </FormProvider>
       </S.Container>
     </Wrapper>

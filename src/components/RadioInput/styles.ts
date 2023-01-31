@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { ColorsInterface } from "../../interfaces/colors";
 
 interface InputProps {
-  color: "red" | "yellow" | "green" | "primary";
+  color: ColorsInterface;
 }
 
 export const InputContainer = styled.label<InputProps>`

@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { Navigate } from "react-router-dom";
 import { AuthToken } from "./authToken";
@@ -38,6 +38,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
       console.log(error);
     }
   }
+
+  useEffect(() => {
+    AuthToken(cookies.user.token);
+  }, []);
 
   return (
     <AuthContext.Provider
