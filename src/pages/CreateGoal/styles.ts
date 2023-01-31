@@ -12,6 +12,15 @@ export const Container = styled.div`
   top: -4rem; ;
 `;
 
+export const Content = styled.form`
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+`;
+
 export const ColorContent = styled.div`
   width: 100%;
   height: 100%;
@@ -25,6 +34,7 @@ export const ColorContent = styled.div`
 
 export const SeparateBy = styled.div`
   width: 100%;
+  height: 9.8rem;
   display: flex;
   gap: 2.4rem;
 `;
@@ -54,6 +64,13 @@ export const SeparatedByValueBar = styled.div`
   background-color: ${(props) => props.theme.primary};
 `;
 
+export const SeparatedByPercentageContent = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: -1.6rem;
+`;
+
 interface PercentageProps {
   sizeChange: string;
 }
@@ -74,6 +91,10 @@ export const SeparatedByPercentage = styled.input<PercentageProps>`
   cursor: pointer;
   background-size: ${(props) => props.sizeChange};
   background-repeat: no-repeat;
+
+  :focus {
+    box-shadow: none;
+  }
 
   /* Input Thumb */
   ::-webkit-slider-thumb {
@@ -139,7 +160,35 @@ export const SeparatedByPercentage = styled.input<PercentageProps>`
   }
 `;
 
+export const Percentage = styled.output<PercentageProps>`
+  position: relative;
+  transform-origin: center center;
+  display: block;
+  text-align: center;
+  left: ${(props) => props.sizeChange};
+  width: fit-content;
+  font-size: 1.4rem;
+  font-weight: 300;
+
+  &::after {
+    content: "%";
+    display: block;
+    margin-top: -18px;
+    margin-right: -40px;
+  }
+`;
+
+export const IndeterminateTime = styled.div`
+  width: 100%;
+
+  & > span {
+    font-size: 1.4rem;
+    font-weight: 300;
+  }
+`;
+
 export const Input = styled.input`
+  min-width: 2rem;
   background-color: ${(props) => props.theme["background-light"]};
   outline: none;
   border: none;
@@ -154,4 +203,28 @@ export const Input = styled.input`
     -webkit-appearance: none;
     margin: 0;
   }
+`;
+
+export const DateInput = styled.input`
+  width: 4rem;
+  background-color: ${(props) => props.theme["background-light"]};
+  outline: none;
+  border: none;
+  box-shadow: none !important;
+
+  color: ${(props) => props.theme.text};
+  ::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  ::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+`;
+
+export const Warning = styled.span`
+  font-size: 1.4rem;
+  font-weight: 300;
+  margin-top: 0.8rem;
 `;

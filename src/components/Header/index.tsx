@@ -1,5 +1,5 @@
-import { Menu, MenuItem } from "@szhsin/react-menu";
-import { HouseSimple, User } from "phosphor-react";
+import { MenuItem } from "@szhsin/react-menu";
+import { HouseSimple, Plus, User } from "phosphor-react";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../services/AuthContext";
@@ -19,6 +19,10 @@ export function Header() {
 
   function handleProfile() {
     navigation("/user");
+  }
+
+  function handleCreateGoal() {
+    navigation("/create-goal");
   }
 
   return (
@@ -43,6 +47,11 @@ export function Header() {
           <MenuItem onClick={handleProfile}>
             <User size={24} />
             <span>Editar Perfil</span>
+          </MenuItem>
+
+          <MenuItem onClick={handleCreateGoal}>
+            <Plus size={24} />
+            <span>Criar meta</span>
           </MenuItem>
         </S.PopUp>
       </Wrapper>
