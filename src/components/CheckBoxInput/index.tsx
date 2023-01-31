@@ -2,7 +2,7 @@ import { useFormContext } from "react-hook-form";
 import * as S from "./styles";
 
 interface CheckBoxProps {
-  label: string;
+  label?: string;
   registerValue: string;
 }
 

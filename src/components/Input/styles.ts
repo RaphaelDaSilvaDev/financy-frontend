@@ -9,6 +9,11 @@ export const InputContainer = styled.div`
     gap: 0.8rem;
     user-select: none;
 
+    & > span {
+      font-size: 1.8rem;
+      font-weight: 300;
+    }
+
     & > input {
       width: 100%;
       height: 5.6rem;

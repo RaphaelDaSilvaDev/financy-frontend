@@ -1,3 +1,13 @@
+const otherColors = {
+  red: "#E03616",
+
+  yellow: "#FFBC1F",
+
+  green: "#03DD62",
+
+  primary: "#0096CC",
+};
+
 export const defaultTheme = {
   light: {
     white: "#FFF",
@@ -18,6 +28,8 @@ export const defaultTheme = {
     "danger-light": "#E34F4F",
 
     black: "#000",
+
+    otherColors,
   },
   dark: {
     white: "#FFF",
@@ -38,5 +50,7 @@ export const defaultTheme = {
     "danger-light": "#E34F4F",
 
     black: "#000",
+
+    otherColors,
   },
 };
