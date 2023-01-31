@@ -40,11 +40,13 @@ export const Info = styled.div`
   & > span {
     font-size: 1.4rem;
     font-weight: 300;
+    user-select: none;
   }
 
   & > strong {
     font-size: 1.8rem;
     font-weight: 400;
+    user-select: none;
   }
 `;
 

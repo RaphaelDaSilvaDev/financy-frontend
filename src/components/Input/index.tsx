@@ -14,7 +14,7 @@ export function Input({ label, placeHolder, type, registerValue }: InputProps) {
   return (
     <S.InputContainer>
       <label>
-        {label}
+        <span>{label}</span>
         <input placeholder={placeHolder} type={type} {...register(registerValue)} />
       </label>
     </S.InputContainer>
