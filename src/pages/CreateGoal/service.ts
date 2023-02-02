@@ -3,7 +3,7 @@ import { api } from "../../services/api";
 interface CreateGoalProps {
   color: string;
   end_by: string;
-  end_by_value: string;
+  end_by_value: number;
   income_type: string;
   income_value: string;
   name: string;

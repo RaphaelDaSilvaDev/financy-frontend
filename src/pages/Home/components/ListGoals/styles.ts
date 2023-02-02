@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { defaultTheme } from "../../../../styles/themes/default";
 
 export const Container = styled.div`
   width: 100%;
@@ -16,13 +17,33 @@ export const Content = styled.div`
   display: flex;
   align-items: center;
   gap: 2.4rem;
+
+  cursor: pointer;
+
+  transition: scale 175ms;
+
+  :hover {
+    scale: 1.05;
+  }
 `;
 
-export const GoalContent = styled.div`
+interface GoalContentProps {
+  isSelected: boolean;
+}
+
+export const GoalContent = styled.div<GoalContentProps>`
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  span {
+    color: ${(props) => props.isSelected && defaultTheme.dark.text};
+  }
+
+  svg {
+    color: ${(props) => props.isSelected && defaultTheme.dark.text};
+  }
 `;
 
 export const GoalValue = styled.div`
@@ -38,5 +59,5 @@ export const Bar = styled.div`
 
   border-radius: 8px;
 
-  background-color: ${(props) => props.theme.primary};
+  background-color: ${(props) => props.theme["primary-light"]};
 `;
