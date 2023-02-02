@@ -1,12 +1,18 @@
 import styled from "styled-components";
+import { defaultTheme } from "../../styles/themes/default";
 
-export const Container = styled.div`
+interface ContainerProps {
+  isSelected: boolean;
+}
+
+export const Container = styled.div<ContainerProps>`
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
 
-  background-color: ${(props) => props.theme["background-light"]};
+  background-color: ${(props) =>
+    props.isSelected ? props.theme.primary : props.theme["background-light"]};
 
   position: relative;
   border-radius: 16px;
@@ -14,7 +20,7 @@ export const Container = styled.div`
 
   border: 2px solid ${(props) => props.theme.background};
 
-  color: ${(props) => props.theme.text};
+  color: ${(props) => props.isSelected && defaultTheme.dark.text};
   transition: all 0.5s ease;
 `;
 

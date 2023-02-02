@@ -27,6 +27,15 @@ export const InputContainer = styled.div`
         color: ${(props) => props.theme.placeholder};
       }
       transition: all 0.5s ease;
+
+      ::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      ::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
     }
   }
 `;

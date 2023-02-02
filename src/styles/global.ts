@@ -7,7 +7,7 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
-/* ::-webkit-scrollbar {
+ ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
@@ -16,30 +16,30 @@ export const GlobalStyles = createGlobalStyle`
   height: 0px;
 }
 ::-webkit-scrollbar-thumb {
-  background: ${(props) => props.theme["yellow"]};
+  background: ${(props) => props.theme["background-light"]};
   border: 0px none #ffffff;
   border-radius: 2px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: ${(props) => props.theme["yellow-500"]};
+  background: ${(props) => props.theme["background-light"]};
 }
 ::-webkit-scrollbar-thumb:active {
-  background: ${(props) => props.theme["yellow-500"]};
+  background: ${(props) => props.theme["background-light"]};
 }
 ::-webkit-scrollbar-track {
-  background: ${(props) => props.theme["gray-300"]};
+  background: ${(props) => props.theme.placeholder};
   border: 0px none #ffffff;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-track:hover {
-  background:${(props) => props.theme["gray-300"]};
+  background:${(props) => props.theme.placeholder};
 }
 ::-webkit-scrollbar-track:active {
-  background:${(props) => props.theme["gray-300"]};
+  background:${(props) => props.theme.placeholder};
 }
 ::-webkit-scrollbar-corner {
   background: transparent;
-} */
+}
   
   :focus{
     outline: 0;
@@ -53,6 +53,7 @@ export const GlobalStyles = createGlobalStyle`
   body{
     background-color: ${(props) => props.theme["background"]};
     color: ${(props) => props.theme["text-secondary"]};
+    overflow: hidden;
   }
 
   body, input-security, textarea, button, input{

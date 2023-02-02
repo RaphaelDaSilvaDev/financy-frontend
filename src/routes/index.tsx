@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes as ReactRoutes } from "react-router-dom";
 import { HeaderLayout } from "../layout/HeaderLayout";
 import { CreateGoal } from "../pages/CreateGoal";
-import { Home } from "../pages/Home";
+import { HomePage } from "../pages/Home";
 import { Login } from "../pages/Login";
 import { Signin } from "../pages/Signin";
 import { User } from "../pages/User";
@@ -18,7 +18,7 @@ export function Routes() {
             path="/"
             element={
               <AuthValidation>
-                <Home />
+                <HomePage />
               </AuthValidation>
             }
           />

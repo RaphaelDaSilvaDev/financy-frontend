@@ -12,4 +12,5 @@ export interface GoalInterface {
   color: ColorsInterface;
   created_at: string;
   updated_at: string;
+  balance: number;
 }

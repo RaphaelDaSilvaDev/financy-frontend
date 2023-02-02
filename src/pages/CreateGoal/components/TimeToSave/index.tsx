@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { RadioInput } from "../../../../components/RadioInput";
 import { Widget } from "../../../../components/Widget";
@@ -6,6 +7,13 @@ import * as S from "../../styles";
 
 export function TimeToSave() {
   const methods = useFormContext();
+
+  useEffect(() => {
+    const indeterminateEnd = methods.watch("end_by");
+    if (indeterminateEnd === "indeterminate") {
+      methods.setValue("end_by_value", 1);
+    }
+  }, [methods.watch("end_by")]);
 
   return (
     <S.SeparateBy>
