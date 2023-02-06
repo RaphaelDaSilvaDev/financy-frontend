@@ -5,3 +5,9 @@ export function GetAllGoalsService() {
 
   return response;
 }
+
+export function RemoveGoalService(id: string) {
+  const response = api.delete(`goal/${id}`);
+
+  return response;
+}

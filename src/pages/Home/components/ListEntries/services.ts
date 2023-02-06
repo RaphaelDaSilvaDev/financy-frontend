@@ -11,3 +11,15 @@ export async function GetGoalEntriesService(id: string) {
 
   return data;
 }
+
+export async function RemoveEntryService(id: string) {
+  const data = await api.delete(`entry/${id}`);
+
+  return data;
+}
+
+export async function RemoveEntryGoalService(id: string) {
+  const data = await api.delete(`entry/goal/${id}`);
+
+  return data;
+}

@@ -5,4 +5,5 @@ export interface GeneralReportInterface {
   name: string;
   color: ColorsInterface;
   percentage: string;
+  balance: string;
 }

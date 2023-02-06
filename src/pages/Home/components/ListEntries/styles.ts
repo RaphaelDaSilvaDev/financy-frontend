@@ -50,5 +50,7 @@ export const Trash = styled.div`
   align-items: center;
   justify-content: center;
 
+  cursor: pointer;
+
   background-color: ${(props) => props.theme.danger};
 `;
