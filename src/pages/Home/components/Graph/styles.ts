@@ -54,5 +54,41 @@ export const Trash = styled.div`
   align-items: center;
   justify-content: center;
 
+  cursor: pointer;
+
   background-color: ${(props) => props.theme.danger};
+`;
+
+export const Legend = styled.div`
+  align-self: flex-end;
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+
+  & > div {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+
+    & > span {
+      font-size: 1.4rem;
+      font-weight: 300;
+    }
+  }
+`;
+
+export const LineBar = styled.hr`
+  width: 2rem;
+  background-color: transparent;
+  border: none;
+  height: 0.2rem;
+  background: ${(props) => props.theme.primary};
+`;
+
+export const DashedBar = styled.hr`
+  width: 2rem;
+  background-color: transparent;
+  border: none;
+  height: 0.2rem;
+  background: repeating-linear-gradient(90deg, #fff, #fff 4px, transparent 4px, transparent 8px);
 `;

@@ -8,12 +8,9 @@ import * as S from "./styles";
 
 export function Header() {
   const navigation = useNavigate();
-
-  const [openMenu, setOpenMenu] = useState<boolean>(false);
   const { user } = useContext(AuthContext);
 
   function handleHome() {
-    setOpenMenu(false);
     navigation("/");
   }
 
@@ -30,7 +27,7 @@ export function Header() {
       <Wrapper>
         <S.PopUp
           menuButton={
-            <S.Content onClick={() => setOpenMenu(true)}>
+            <S.Content>
               <img />
               <S.Info>
                 <span>Olá,</span>

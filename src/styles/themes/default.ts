@@ -16,6 +16,7 @@ export const defaultTheme = {
     white: "#FFF",
 
     primary: "#0096CC",
+    primary0: "#0096CC00",
     "primary-light": "#1FC3FF",
 
     background: "#E5EFF8",
@@ -38,6 +39,7 @@ export const defaultTheme = {
     white: "#FFF",
 
     primary: "#0096CC",
+    primary0: "#0096CC00",
     "primary-light": "#1FC3FF",
 
     background: "#131614",

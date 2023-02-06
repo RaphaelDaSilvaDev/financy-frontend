@@ -3,10 +3,17 @@ import { createContext, useEffect, useState } from "react";
 import { ToastStyle } from "../../components/Toast/ToastStyle";
 import { GeneralReportInterface } from "./components/GeneralReport/interfaces";
 import { GetGeneralReportService } from "./components/GeneralReport/services";
+import { GraphDetailsInterface } from "./components/Graph/components/SplineGraph/interfaces";
+import { GetGraphDetailsService } from "./components/Graph/components/SplineGraph/services";
 import { EntryInterface } from "./components/ListEntries/interfaces";
-import { GetEntriesService, GetGoalEntriesService } from "./components/ListEntries/services";
+import {
+  GetEntriesService,
+  GetGoalEntriesService,
+  RemoveEntryGoalService,
+  RemoveEntryService,
+} from "./components/ListEntries/services";
 import { GoalInterface } from "./components/ListGoals/interfaces";
-import { GetAllGoalsService } from "./components/ListGoals/services";
+import { GetAllGoalsService, RemoveGoalService } from "./components/ListGoals/services";
 
 interface HomeContextProps {
   goals: GoalInterface[];
@@ -14,13 +21,25 @@ interface HomeContextProps {
   generalReport: GeneralReportInterface[];
   selectedGoal: GoalInterface | null;
   totalBalance: number | undefined;
+  graphDetails: GraphDetailsInterface[];
+  loading: LoadingProps;
 
   HandleSelectGoal(goal: GoalInterface): void;
+  RemoveGoal(id: string): Promise<void>;
+  RemoveEntry(id: string): Promise<void>;
+  RemoveEntryGoal(id: string): Promise<void>;
   Reload(): void;
 }
 
 interface HomeProviderProps {
   children: React.ReactNode;
+}
+
+interface LoadingProps {
+  goals: boolean;
+  entries: boolean;
+  generalReport: boolean;
+  graph: boolean;
 }
 
 export const HomeContext = createContext({} as HomeContextProps);
@@ -31,8 +50,18 @@ export function HomeContextProvider({ children }: HomeProviderProps) {
   const [entries, setEntries] = useState<EntryInterface[]>([]);
   const [generalReport, setGeneralReport] = useState<GeneralReportInterface[]>([]);
   const [totalBalance, setTotalBalance] = useState<number>();
+  const [graphDetails, setGraphDetails] = useState<GraphDetailsInterface[]>([]);
+  const [loading, setLoading] = useState<LoadingProps>({
+    entries: true,
+    generalReport: true,
+    goals: true,
+    graph: true,
+  });
 
   async function GetGoals() {
+    setLoading((prev) => {
+      return { ...prev, goals: true };
+    });
     try {
       const { data } = await GetAllGoalsService();
       setGoals(data);
@@ -40,10 +69,17 @@ export function HomeContextProvider({ children }: HomeProviderProps) {
       if (axios.isAxiosError(error)) {
         ToastStyle({ message: error.response?.data.message, styleToast: "error" });
       }
+    } finally {
+      setLoading((prev) => {
+        return { ...prev, goals: false };
+      });
     }
   }
 
   async function GetEntries() {
+    setLoading((prev) => {
+      return { ...prev, entries: true };
+    });
     try {
       const { data } = await GetEntriesService();
       setEntries(data);
@@ -51,10 +87,17 @@ export function HomeContextProvider({ children }: HomeProviderProps) {
       if (axios.isAxiosError(error)) {
         ToastStyle({ message: error.response?.data.message, styleToast: "error" });
       }
+    } finally {
+      setLoading((prev) => {
+        return { ...prev, entries: false };
+      });
     }
   }
 
   async function GetGoalEntries(id: string) {
+    setLoading((prev) => {
+      return { ...prev, entries: true };
+    });
     try {
       const { data } = await GetGoalEntriesService(id);
       setEntries(data);
@@ -62,13 +105,76 @@ export function HomeContextProvider({ children }: HomeProviderProps) {
       if (axios.isAxiosError(error)) {
         ToastStyle({ message: error.response?.data.message, styleToast: "error" });
       }
+    } finally {
+      setLoading((prev) => {
+        return { ...prev, entries: false };
+      });
     }
   }
 
   async function GetGeneralReport() {
+    setLoading((prev) => {
+      return { ...prev, generalReport: true };
+    });
     try {
       const { data } = await GetGeneralReportService();
       setGeneralReport(data);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        ToastStyle({ message: error.response?.data.message, styleToast: "error" });
+      }
+    } finally {
+      setLoading((prev) => {
+        return { ...prev, generalReport: false };
+      });
+    }
+  }
+
+  async function GetGraph() {
+    setLoading((prev) => {
+      return { ...prev, graph: true };
+    });
+    try {
+      const { data } = await GetGraphDetailsService(selectedGoal?.id);
+      setGraphDetails(data);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        ToastStyle({ message: error.response?.data.message, styleToast: "error" });
+      }
+    } finally {
+      setLoading((prev) => {
+        return { ...prev, graph: false };
+      });
+    }
+  }
+
+  async function RemoveGoal(id: string) {
+    try {
+      await RemoveGoalService(id);
+      setSelectedGoal(null);
+      Reload();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        ToastStyle({ message: error.response?.data.message, styleToast: "error" });
+      }
+    }
+  }
+
+  async function RemoveEntry(id: string) {
+    try {
+      await RemoveEntryService(id);
+      Reload();
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        ToastStyle({ message: error.response?.data.message, styleToast: "error" });
+      }
+    }
+  }
+
+  async function RemoveEntryGoal(id: string) {
+    try {
+      await RemoveEntryGoalService(id);
+      Reload();
     } catch (error) {
       if (axios.isAxiosError(error)) {
         ToastStyle({ message: error.response?.data.message, styleToast: "error" });
@@ -90,6 +196,7 @@ export function HomeContextProvider({ children }: HomeProviderProps) {
     GetGoals();
     GetEntries();
     GetGeneralReport();
+    GetGraph();
   }
 
   useEffect(() => {
@@ -99,6 +206,10 @@ export function HomeContextProvider({ children }: HomeProviderProps) {
     );
     setTotalBalance(total);
   }, [entries]);
+
+  useEffect(() => {
+    GetGraph();
+  }, [selectedGoal]);
 
   useEffect(() => {
     Reload();
@@ -112,7 +223,12 @@ export function HomeContextProvider({ children }: HomeProviderProps) {
         generalReport,
         selectedGoal,
         totalBalance,
+        graphDetails,
+        loading,
         HandleSelectGoal,
+        RemoveGoal,
+        RemoveEntry,
+        RemoveEntryGoal,
         Reload,
       }}
     >
