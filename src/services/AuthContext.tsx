@@ -6,7 +6,7 @@ import { AuthToken } from "./authToken";
 interface AuthContextProps {
   user: UserProps;
   setCookies: (name: "user", value: any) => void;
-  handleOnSignin(): JSX.Element | undefined;
+  handleOnSignOut(): JSX.Element | undefined;
 }
 
 export const AuthContext = createContext({} as AuthContextProps);
@@ -18,9 +18,13 @@ interface AuthProviderProps {
 interface UserProps {
   token: string;
   user: {
-    name: string;
+    avatar: string;
+    avatar_url: string;
+    born: string;
     email: string;
-    isAdmin: boolean;
+    gender: string;
+    id: string;
+    name: string;
   };
 }
 
@@ -29,7 +33,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const user: UserProps = cookies.user;
 
-  function handleOnSignin() {
+  function handleOnSignOut() {
     try {
       removeCookies("user");
       AuthToken(undefined);
@@ -39,16 +43,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
-  useEffect(() => {
-    AuthToken(cookies.user.token);
-  }, []);
-
   return (
     <AuthContext.Provider
       value={{
         user,
         setCookies,
-        handleOnSignin,
+        handleOnSignOut,
       }}
     >
       {children}

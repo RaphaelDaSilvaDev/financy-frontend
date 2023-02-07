@@ -29,9 +29,8 @@ export function Home() {
     const values = methods.getValues();
 
     try {
-      const response = await AddEntryService(values);
+      await AddEntryService(values);
       methods.reset();
-      console.log(response);
       Reload();
     } catch (error) {
       if (axios.isAxiosError(error)) {

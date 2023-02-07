@@ -1,10 +1,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
-import { Page } from "../../components/Page";
+import { InputFile } from "../../components/InputFile";
+import { InputSwitch } from "../../components/InputSwitch";
 import { Wrapper } from "../../components/Page/styles";
 import { ToastStyle } from "../../components/Toast/ToastStyle";
 import { Widget } from "../../components/Widget";
@@ -16,31 +17,43 @@ import { PayloadProps, UpdateProfile } from "./services";
 import * as S from "./styles";
 
 export function User() {
-  const { user, setCookies, handleOnSignin } = useContext(AuthContext);
-  const { theme, handleToggleTheme } = useContext(ThemeContext);
+  const { user, setCookies, handleOnSignOut } = useContext(AuthContext);
+  const { handleToggleTheme } = useContext(ThemeContext);
+
+  const [gender, setGender] = useState<any>(user?.user?.gender);
+  const [avatar, setAvatar] = useState<File | undefined>(undefined);
 
   const method = useForm<UserSchemaType>({
     resolver: zodResolver(UserSchema),
     mode: "onSubmit",
+    defaultValues: {
+      date: user.user.born || "",
+    },
   });
 
   async function handleOnEditProfile() {
-    const name = method.getValues("name");
-    const password = method.getValues("password");
+    const values = method.getValues();
 
-    if (!name && !password)
+    if (!values)
       return ToastStyle({ message: "Preencha um dos campos para salvar", styleToast: "warning" });
 
     const payload: PayloadProps = {};
 
-    if (name) payload.name = name;
-    if (password) payload.password = password;
+    if (values.name) payload.name = values.name;
+    if (values.password) payload.password = values.password;
+    if (values.date) payload.born = values.date;
+    if (gender) payload.gender = gender;
+    if (avatar) payload.avatar = avatar as File;
 
-    name ? (user.user.name = name) : "";
+    values.name ? (user.user.name = values.name) : "";
 
     try {
-      await UpdateProfile(payload);
-      setCookies("user", user);
+      const { data } = await UpdateProfile(payload);
+      const userInfo = {
+        token: user.token,
+        user: data,
+      };
+      setCookies("user", userInfo);
       ToastStyle({
         message: "Successfully updated user",
         styleToast: "success",
@@ -64,6 +77,23 @@ export function User() {
     });
   }
 
+  const genderOptions = [
+    {
+      id: 1,
+      label: "Masculino",
+      value: "Male",
+    },
+    {
+      id: 2,
+      label: "Feminino",
+      value: "Famale",
+    },
+  ];
+
+  useEffect(() => {
+    method.setValue("date", user.user.born);
+  }, [user]);
+
   return (
     <Wrapper>
       <S.Container>
@@ -72,7 +102,34 @@ export function User() {
             <S.EditProfile
               onSubmit={method.handleSubmit(handleOnEditProfile, onErrorHandleOnEditProfile)}
             >
-              <Input label="Nome" placeHolder={user.user.name} registerValue="name" type="text" />
+              <InputFile setAvatar={setAvatar} />
+              <Input
+                label="Data de Nascimento"
+                registerValue="date"
+                type="date"
+                placeHolder={user.user.born}
+              />
+
+              <S.SelectContainer>
+                <label>
+                  <span>Sexo</span>
+                </label>
+                <S.SelectInput
+                  options={genderOptions}
+                  isSearchable={false}
+                  defaultValue={user.user.gender}
+                  placeholder={user.user.gender}
+                  //@ts-ignore
+                  onChange={(option) => setGender(option.label)}
+                />
+              </S.SelectContainer>
+
+              <Input
+                label="Nome"
+                placeHolder={user && user.user ? user.user.name : ""}
+                registerValue="name"
+                type="text"
+              />
               <Input label="Senha" placeHolder="******" registerValue="password" type="password" />
               <Button text="Salvar Edição" />
             </S.EditProfile>
@@ -82,14 +139,11 @@ export function User() {
         <Widget title="Tema">
           <S.SwitchTheme>
             <span>Preferência de tema escuro</span>
-            <label className="switch">
-              <input type="checkbox" checked={theme === "dark"} onChange={handleToggleTheme} />
-              <span className="slider"></span>
-            </label>
+            <InputSwitch onChange={handleToggleTheme} />
           </S.SwitchTheme>
         </Widget>
 
-        <Button text="Sair da Conta" type="danger" onClick={handleOnSignin} />
+        <Button text="Sair da Conta" type="danger" onClick={handleOnSignOut} />
       </S.Container>
     </Wrapper>
   );

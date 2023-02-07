@@ -9,6 +9,7 @@ export const UserSchema = zod.object({
     ])
     .optional()
     .transform((e) => (e === "" ? undefined : e)),
+  date: zod.string().optional(),
 });
 
 export type UserSchemaType = zod.infer<typeof UserSchema>;

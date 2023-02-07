@@ -6,15 +6,18 @@ import { Routes } from "./routes";
 import { ThemeContext } from "./styles/themes/ThemeContext";
 import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "./services/AuthContext";
+import { CookiesProvider } from "react-cookie";
 
 function App() {
   const { theme } = useContext(ThemeContext);
 
   return (
     <ThemeProvider theme={theme === "dark" ? defaultTheme[theme] : defaultTheme[theme]}>
-      <AuthProvider>
-        <Routes />
-      </AuthProvider>
+      <CookiesProvider>
+        <AuthProvider>
+          <Routes />
+        </AuthProvider>
+      </CookiesProvider>
       <Toaster
         toastOptions={{
           style: {

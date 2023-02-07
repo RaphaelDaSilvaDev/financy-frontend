@@ -21,6 +21,7 @@ export const Container = styled.div`
     font-family: "Montserrat", sans-serif !important;
     font-weight: 300;
     font-size: 1.4rem !important;
+    color: ${(props) => props.theme.text};
   }
 
   .bullet {
@@ -39,10 +40,11 @@ export const Container = styled.div`
   .tooltipPoint {
     font-size: 1.4rem;
     padding-left: 5px;
-    /* color: #FF0045; */
 
     font-family: "Montserrat", sans-serif !important;
     font-weight: 300;
+
+    color: ${(props) => props.theme.text};
 
     & > strong {
       font-weight: 800;
@@ -68,5 +70,6 @@ export const Container = styled.div`
     font-family: "Montserrat", sans-serif !important;
     font-weight: 300;
     font-size: 1.4rem !important;
+    color: ${(props) => props.theme.text};
   }
 `;

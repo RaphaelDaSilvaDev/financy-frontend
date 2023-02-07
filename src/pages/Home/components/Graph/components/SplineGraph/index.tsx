@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { addDays, format } from "date-fns";
 import ptBr from "date-fns/locale/pt-BR";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
@@ -12,7 +12,7 @@ export function SplineGraph() {
   const { graphDetails, selectedGoal } = useContext(HomeContext);
 
   const month = graphDetails.map((detail) => {
-    const generateDate = format(new Date(detail.date), "LLLL", { locale: ptBr });
+    const generateDate = format(addDays(new Date(detail.date), 1), "LLLL", { locale: ptBr });
     const date = generateDate.charAt(0).toUpperCase() + generateDate.substring(1);
     return date;
   });
@@ -62,7 +62,9 @@ export function SplineGraph() {
       headerFormat: "<div></div>",
       pointFormat:
         '<div class="tooltip"><div class="tooltipContainer">' +
-        '<div style="border:4px solid {point.color}" class="bullet"></div><span>{series.name}</span>' +
+        `<div style="border:4px solid ${
+          selectedGoal ? defaultTheme.dark.otherColors[selectedGoal.color] : "{point.color}"
+        } " class="bullet"></div><span>{series.name}</span>` +
         "</div>" +
         `<span class="tooltipPoint">Valor Total: R$<strong>{point.y}</strong></span>` +
         `<span class="tooltipPoint">Valor deste mês: R$<strong>{point.month}</strong></span>`,
@@ -127,7 +129,7 @@ export function SplineGraph() {
           },
           {
             dashStyle: "dash",
-            color: "#E0E0E0",
+            color: defaultTheme[theme]["text-secondary"],
           },
         ],
       },

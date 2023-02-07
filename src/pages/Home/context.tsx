@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
 import { ToastStyle } from "../../components/Toast/ToastStyle";
 import { GeneralReportInterface } from "./components/GeneralReport/interfaces";
 import { GetGeneralReportService } from "./components/GeneralReport/services";
@@ -45,6 +45,7 @@ interface LoadingProps {
 export const HomeContext = createContext({} as HomeContextProps);
 
 export function HomeContextProvider({ children }: HomeProviderProps) {
+  const firstRender = useRef(true);
   const [selectedGoal, setSelectedGoal] = useState<GoalInterface | null>(null);
   const [goals, setGoals] = useState<GoalInterface[]>([]);
   const [entries, setEntries] = useState<EntryInterface[]>([]);
@@ -208,11 +209,17 @@ export function HomeContextProvider({ children }: HomeProviderProps) {
   }, [entries]);
 
   useEffect(() => {
-    GetGraph();
+    if (!firstRender.current && graphDetails.length !== 0) {
+      GetGraph();
+    }
   }, [selectedGoal]);
 
   useEffect(() => {
-    Reload();
+    if (!firstRender.current) {
+      Reload();
+    } else {
+      firstRender.current = false;
+    }
   }, []);
 
   return (

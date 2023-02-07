@@ -1,3 +1,4 @@
+import { format, subYears } from "date-fns";
 import { useFormContext, UseFormRegister } from "react-hook-form";
 import * as S from "./styles";
 
@@ -13,10 +14,16 @@ export function Input({ label, placeHolder, type, registerValue }: InputProps) {
 
   return (
     <S.InputContainer>
-      <label>
+      <label htmlFor={registerValue}>
         <span>{label}</span>
-        <input placeholder={placeHolder} type={type} {...register(registerValue)} />
       </label>
+      <input
+        placeholder={placeHolder}
+        type={type}
+        max={type === "date" ? format(subYears(new Date(), 16), "yyyy-MM-dd") : ""}
+        {...register(registerValue)}
+        id={registerValue}
+      />
     </S.InputContainer>
   );
 }

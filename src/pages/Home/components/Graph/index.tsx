@@ -7,8 +7,7 @@ import { SplineGraph } from "./components/SplineGraph";
 import * as S from "./styles";
 
 export function Graph() {
-  const { selectedGoal, totalBalance, loading, entries, goals, RemoveGoal } =
-    useContext(HomeContext);
+  const { selectedGoal, totalBalance, loading, entries, RemoveGoal } = useContext(HomeContext);
 
   return (
     <>
@@ -16,7 +15,7 @@ export function Graph() {
         <></>
       ) : (
         <S.Container>
-          {loading.goals ? (
+          {loading.goals || loading.graph ? (
             <Loading />
           ) : (
             <Widget>
