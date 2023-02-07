@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Select from "react-select";
 
 export const Container = styled.div`
   width: 100%;
@@ -13,7 +14,8 @@ export const Container = styled.div`
 export const EditProfile = styled.form`
   width: 100%;
   height: 100%;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
   align-items: flex-end;
   gap: 2.4rem;
 `;
@@ -33,55 +35,68 @@ export const SwitchTheme = styled.div`
   & > span {
     font-weight: 300;
   }
+`;
 
-  .switch {
-    position: relative;
-    display: inline-block;
-    width: 4.8rem;
-    height: 2.4rem;
-  }
+export const SelectContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
 
-  /* Hide default HTML checkbox */
-  .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-
-  /* The slider */
-  .slider {
-    position: absolute;
+  & > label {
+    width: fit-content;
+    user-select: none;
     cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: transparent;
-    border: 2px solid ${(props) => props.theme.primary};
-    border-radius: 6px;
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
+
+    & > span {
+      font-size: 1.8rem;
+      font-weight: 300;
+    }
+  }
+`;
+
+export const SelectInput = styled(Select)`
+  width: 100%;
+
+  & > div:first-of-type {
+    width: 100%;
+    height: 5.6rem;
+    padding-inline: 1.6rem;
+    background-color: ${(props) => props.theme.background};
+    color: ${(props) => props.theme.text};
+    border: 0;
+    border-radius: 8px;
+    outline: 0;
+    ::placeholder {
+      color: ${(props) => props.theme.placeholder};
+    }
+    transition: all 0.5s ease;
   }
 
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 2rem;
-    width: 2rem;
-    border-radius: 4px;
-    left: -2px;
-    background-color: ${(props) => props.theme.primary};
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
-  }
+  & > div:last-of-type {
+    width: 100%;
 
-  input:checked + .slider {
-    background-color: ${(props) => props.theme.primary};
-  }
+    padding-inline: 1.6rem;
+    background-color: ${(props) => props.theme.background};
+    color: ${(props) => props.theme.text};
+    border: 0;
+    border-radius: 8px;
+    outline: 0;
+    ::placeholder {
+      color: ${(props) => props.theme.placeholder};
+    }
+    transition: all 0.5s ease;
 
-  input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
+    & > div > div {
+      color: ${(props) => props.theme.text};
+    }
+
+    & > div:last-of-type > div {
+      background-color: transparent;
+
+      :hover {
+        background-color: ${(props) => props.theme["background-light"]};
+      }
+    }
   }
 `;

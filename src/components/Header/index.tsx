@@ -1,8 +1,9 @@
 import { MenuItem } from "@szhsin/react-menu";
 import { HouseSimple, Plus, User } from "phosphor-react";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../services/AuthContext";
+import { AuthToken } from "../../services/authToken";
 import { Wrapper } from "../Page/styles";
 import * as S from "./styles";
 
@@ -22,13 +23,21 @@ export function Header() {
     navigation("/create-goal");
   }
 
+  useEffect(() => {
+    if (!user) {
+      return navigation("/login");
+    }
+
+    AuthToken(user.token);
+  }, []);
+
   return (
     <S.Container>
       <Wrapper>
         <S.PopUp
           menuButton={
             <S.Content>
-              <img />
+              <img src={user?.user?.avatar_url} />
               <S.Info>
                 <span>Olá,</span>
                 <strong>{user?.user?.name || ""}!</strong>

@@ -90,5 +90,11 @@ export const DashedBar = styled.hr`
   background-color: transparent;
   border: none;
   height: 0.2rem;
-  background: repeating-linear-gradient(90deg, #fff, #fff 4px, transparent 4px, transparent 8px);
+  background: repeating-linear-gradient(
+    90deg,
+    ${(props) => props.theme["text-secondary"]},
+    ${(props) => props.theme["text-secondary"]} 4px,
+    transparent 4px,
+    transparent 8px
+  );
 `;
