@@ -76,7 +76,7 @@ export function Login() {
                   registerValue="password"
                 />
                 <Button text="Entrar" />
-                <a href="#">Esqueceu a senha?</a>
+                {/* <a href="#">Esqueceu a senha?</a> */}
               </S.InputsContainer>
 
               <span>

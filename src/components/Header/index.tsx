@@ -20,7 +20,7 @@ export function Header() {
   }
 
   function handleCreateGoal() {
-    navigation("/create-goal");
+    navigation("/goal/create");
   }
 
   useEffect(() => {

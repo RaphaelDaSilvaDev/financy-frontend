@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes as ReactRoutes } from "react-router-dom";
 import { HeaderLayout } from "../layout/HeaderLayout";
-import { CreateGoal } from "../pages/CreateGoal";
+import { CreateGoal } from "../pages/Goal";
 import { HomePage } from "../pages/Home";
 import { Login } from "../pages/Login";
 import { Signin } from "../pages/Signin";
@@ -31,7 +31,15 @@ export function Routes() {
             }
           />
           <Route
-            path="/create-goal"
+            path="/goal/edit/:id?"
+            element={
+              <AuthValidation>
+                <CreateGoal />
+              </AuthValidation>
+            }
+          />
+          <Route
+            path="/goal/create"
             element={
               <AuthValidation>
                 <CreateGoal />
