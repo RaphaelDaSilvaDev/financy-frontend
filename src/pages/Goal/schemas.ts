@@ -1,4 +1,4 @@
-import zod from "zod";
+import zod, { boolean } from "zod";
 
 export const CreateGoalSchema = zod.object({
   name: zod.string().min(1, { message: "Insira o nome da meta" }),
@@ -12,6 +12,7 @@ export const CreateGoalSchema = zod.object({
     .transform((e) => (e ? Number(e).toFixed(2) : "")),
   end_by: zod.string({ required_error: "Escolha uma finalização para a meta" }),
   end_by_value: zod.coerce.number().min(1, { message: "Insira uma finalização maior que 0" }),
+  finishedGoal: zod.coerce.boolean().optional(),
 });
 
 export type CreateGoalSchemaType = zod.infer<typeof CreateGoalSchema>;

@@ -1,5 +1,6 @@
 import { Pencil, Trash } from "phosphor-react";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { Loading } from "../../../../components/Loading";
 import { Widget } from "../../../../components/Widget";
 import { HomeContext } from "../../context";
@@ -7,7 +8,12 @@ import { SplineGraph } from "./components/SplineGraph";
 import * as S from "./styles";
 
 export function Graph() {
+  const navigate = useNavigate();
   const { selectedGoal, totalBalance, loading, entries, RemoveGoal } = useContext(HomeContext);
+
+  function handleEditGoal() {
+    navigate(`/goal/edit/${selectedGoal?.id}`);
+  }
 
   return (
     <>
@@ -28,7 +34,7 @@ export function Graph() {
                     </span>
                   </S.Title>
                   <S.Buttons>
-                    <S.Edit>
+                    <S.Edit onClick={handleEditGoal}>
                       <Pencil color="#FFF" />
                     </S.Edit>
 
