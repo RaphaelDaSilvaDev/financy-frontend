@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 
 interface ThemeContextProps {
   theme: "dark" | "light";
@@ -12,7 +13,8 @@ interface ThemeProps {
 export const ThemeContext = createContext({} as ThemeContextProps);
 
 export function Theme({ children }: ThemeProps) {
-  const getTheme = localStorage.getItem("@financy:theme") as "dark" | "light";
+  const [cookies, setCookies] = useCookies(["theme"]);
+  const getTheme = cookies.theme;
   const [theme, setTheme] = useState<"dark" | "light">(getTheme);
 
   function handleToggleTheme() {
@@ -20,15 +22,15 @@ export function Theme({ children }: ThemeProps) {
   }
 
   useEffect(() => {
-    const getTheme = localStorage.getItem("@financy:theme");
+    const getTheme = cookies.theme;
 
     if (getTheme === theme) return;
 
-    localStorage.setItem("@financy:theme", theme);
+    setCookies("theme", theme);
   }, [theme]);
 
   useEffect(() => {
-    const getTheme = localStorage.getItem("@financy:theme") as "dark" | "light";
+    const getTheme = cookies.theme;
     if (getTheme) {
       setTheme(getTheme);
     }
