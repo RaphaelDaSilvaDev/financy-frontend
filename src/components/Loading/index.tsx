@@ -13,8 +13,8 @@ export function Loading() {
         width={"100%"}
         height={"100%"}
         shape="rect"
-        colorStart={defaultTheme[theme]["background-light"]}
-        colorEnd={defaultTheme[theme].background}
+        colorStart={defaultTheme.light["background-light"]}
+        colorEnd={defaultTheme.light.background}
       />
     </S.LoadingContainer>
   );
