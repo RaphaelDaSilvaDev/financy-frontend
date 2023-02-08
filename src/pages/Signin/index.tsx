@@ -91,10 +91,12 @@ export function Signin() {
                   registerValue="password"
                 />
 
-                {/*  <S.Terms>
-                  <CheckBoxInput label="Aceito os" registerValue="terms" />
-                  <a href="">Termos de uso</a>
-                </S.Terms> */}
+                {
+                  <S.Terms>
+                    <CheckBoxInput label="Aceito os" registerValue="terms" />
+                    <a href="">Termos de uso</a>
+                  </S.Terms>
+                }
 
                 <Button text="Criar conta" />
               </S.InputsContainer>
