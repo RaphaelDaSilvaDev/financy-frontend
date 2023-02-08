@@ -9,22 +9,22 @@ import { AuthProvider } from "./services/AuthContext";
 import { CookiesProvider } from "react-cookie";
 
 function App() {
+  const { theme } = useContext(ThemeContext);
+
   return (
-    <ThemeProvider theme={defaultTheme.light}>
+    <ThemeProvider theme={defaultTheme[theme]}>
       <CookiesProvider>
         <AuthProvider>
           <Routes />
         </AuthProvider>
       </CookiesProvider>
       <Toaster
-        toastOptions={
-          {
-            /*  style: {
+        toastOptions={{
+          style: {
             background: defaultTheme[theme === "dark" ? "dark" : "light"]["background-light"],
             color: defaultTheme[theme === "dark" ? "dark" : "light"].text,
-          }, */
-          }
-        }
+          },
+        }}
       />
       <GlobalStyles />
     </ThemeProvider>
