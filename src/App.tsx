@@ -12,7 +12,7 @@ function App() {
   const { theme } = useContext(ThemeContext);
 
   return (
-    <ThemeProvider theme={() => defaultTheme[theme]}>
+    <ThemeProvider theme={() => (theme === "dark" ? defaultTheme.dark : defaultTheme.light)}>
       <CookiesProvider>
         <AuthProvider>
           <Routes />
