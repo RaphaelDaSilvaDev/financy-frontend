@@ -1,5 +1,5 @@
 import axios from "axios";
-import.meta.env;
+import.meta.env.VITE_URL;
 
 console.log(import.meta.env.VITE_URL);
 
