@@ -123,11 +123,7 @@ export function CreateGoal() {
   }, [editGoal]);
 
   useEffect(() => {
-    if (!firstRender.current) {
-      getAvailablePercentage();
-    } else {
-      firstRender.current = false;
-    }
+    getAvailablePercentage();
   }, []);
 
   return (
