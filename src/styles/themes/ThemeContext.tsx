@@ -15,7 +15,7 @@ export const ThemeContext = createContext({} as ThemeContextProps);
 export function Theme({ children }: ThemeProps) {
   const [cookies, setCookies] = useCookies(["theme"]);
   const getTheme = cookies.theme;
-  const [theme, setTheme] = useState<"dark" | "light">(getTheme);
+  const [theme, setTheme] = useState<"dark" | "light">(getTheme ? getTheme : "light");
 
   function handleToggleTheme() {
     setTheme(theme === "dark" ? "light" : "dark");
@@ -32,7 +32,7 @@ export function Theme({ children }: ThemeProps) {
   useEffect(() => {
     const getTheme = cookies.theme;
     if (getTheme) {
-      setTheme(getTheme);
+      setTheme(getTheme ? getTheme : "light");
     }
   }, []);
 
