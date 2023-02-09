@@ -1,5 +1,5 @@
 import { Pencil, Trash } from "phosphor-react";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Loading } from "../../../../components/Loading";
 import { Widget } from "../../../../components/Widget";
@@ -9,11 +9,16 @@ import * as S from "./styles";
 
 export function Graph() {
   const navigate = useNavigate();
-  const { selectedGoal, totalBalance, loading, entries, RemoveGoal } = useContext(HomeContext);
+  const { selectedGoal, totalBalance, loading, entries, RemoveGoal, GetGraph } =
+    useContext(HomeContext);
 
   function handleEditGoal() {
     navigate(`/goal/edit/${selectedGoal?.id}`);
   }
+
+  useEffect(() => {
+    GetGraph();
+  }, []);
 
   return (
     <>

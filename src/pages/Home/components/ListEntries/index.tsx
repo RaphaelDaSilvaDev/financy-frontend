@@ -1,7 +1,7 @@
 import { formatDistanceToNow } from "date-fns";
 import ptBr from "date-fns/locale/pt-BR";
 import { Trash, Vault } from "phosphor-react";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Loading } from "../../../../components/Loading";
 import { Widget } from "../../../../components/Widget";
 import { HomeContext } from "../../context";
@@ -9,7 +9,7 @@ import { Title } from "./components/Title";
 import * as S from "./styles";
 
 export function ListEntries() {
-  const { entries, selectedGoal, goals, loading, RemoveEntry, RemoveEntryGoal } =
+  const { entries, selectedGoal, goals, loading, RemoveEntry, RemoveEntryGoal, GetEntries } =
     useContext(HomeContext);
 
   const goalSelected = goals.find((goal) => goal.id === selectedGoal?.id);
@@ -21,6 +21,10 @@ export function ListEntries() {
       RemoveEntry(id);
     }
   }
+
+  useEffect(() => {
+    GetEntries();
+  }, []);
 
   return (
     <S.Container>
