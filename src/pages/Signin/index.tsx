@@ -116,12 +116,7 @@ export function Signin() {
                     </S.Terms>
                   }
 
-                  <Button
-                    text="Criar conta"
-                    onClick={() => {
-                      console.log("AAA");
-                    }}
-                  />
+                  <Button text="Criar conta" />
                 </S.InputsContainer>
 
                 <span>
