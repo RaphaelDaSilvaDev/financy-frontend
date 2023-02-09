@@ -22,7 +22,7 @@ export function RadioInput({
 
   return (
     <S.InputContainer color={color}>
-      {label}
+      <p>{label}</p>
       <input type="radio" value={value} {...register(registerValue)} name={name} />
       <span></span>
     </S.InputContainer>

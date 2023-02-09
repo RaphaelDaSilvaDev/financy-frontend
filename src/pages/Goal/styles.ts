@@ -37,6 +37,12 @@ export const SeparateBy = styled.div`
   height: 9.8rem;
   display: flex;
   gap: 2.4rem;
+
+  @media screen and (max-width: 954px) {
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+  }
 `;
 
 export const SeparateByContent = styled.div`
@@ -45,6 +51,12 @@ export const SeparateByContent = styled.div`
   display: flex;
   align-items: center;
   gap: 2.4rem;
+
+  @media screen and (max-width: 954px) {
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+  }
 `;
 
 export const SeparateByValue = styled.div`
