@@ -37,7 +37,7 @@ export function Header() {
         <S.PopUp
           menuButton={
             <S.Content>
-              <img src={user?.user?.avatar_url} />
+              <img src={user?.user?.avatar} />
               <S.Info>
                 <span>Olá,</span>
                 <strong>{user?.user?.name || ""}!</strong>
