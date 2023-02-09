@@ -29,6 +29,11 @@ interface HomeContextProps {
   RemoveEntry(id: string): Promise<void>;
   RemoveEntryGoal(id: string): Promise<void>;
   Reload(): void;
+
+  GetGoals(): Promise<void>;
+  GetEntries(): Promise<void>;
+  GetGeneralReport(): Promise<void>;
+  GetGraph(): Promise<void>;
 }
 
 interface HomeProviderProps {
@@ -214,14 +219,6 @@ export function HomeContextProvider({ children }: HomeProviderProps) {
     }
   }, [selectedGoal]);
 
-  useEffect(() => {
-    if (!firstRender.current) {
-      Reload();
-    } else {
-      firstRender.current = false;
-    }
-  }, []);
-
   return (
     <HomeContext.Provider
       value={{
@@ -237,6 +234,10 @@ export function HomeContextProvider({ children }: HomeProviderProps) {
         RemoveEntry,
         RemoveEntryGoal,
         Reload,
+        GetEntries,
+        GetGeneralReport,
+        GetGoals,
+        GetGraph,
       }}
     >
       {children}

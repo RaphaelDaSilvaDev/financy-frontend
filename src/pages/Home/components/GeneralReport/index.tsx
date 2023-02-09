@@ -1,5 +1,5 @@
 import Tippy from "@tippyjs/react";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Loading } from "../../../../components/Loading";
 import { Widget } from "../../../../components/Widget";
 import { HomeContext } from "../../context";
@@ -7,12 +7,17 @@ import { Title } from "./components/Title";
 import * as S from "./styles";
 
 export function GeneralReport() {
-  const { generalReport, goals, entries, loading } = useContext(HomeContext);
+  const { generalReport, goals, entries, loading, GetGeneralReport } = useContext(HomeContext);
 
   const totalGeneralReport = generalReport.reduce(
     (acc, value) => Number(acc) + Number(value.balance),
     0
   );
+
+  useEffect(() => {
+    GetGeneralReport();
+  }, []);
+
   return (
     <>
       {!loading.goals &&
