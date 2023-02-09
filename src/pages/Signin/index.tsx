@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Logo from "../../assets/financy.svg";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
@@ -14,8 +14,11 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 import { AuthToken } from "../../services/authToken";
 import { Wrapper } from "../../components/Page/styles";
+import { HashLink } from "react-router-hash-link";
+import { CaretDown } from "phosphor-react";
 
 export function Signin() {
+  const path = useLocation();
   const [cookies, setCookies] = useCookies(["user"]);
 
   const navigation = useNavigate();
@@ -66,44 +69,55 @@ export function Signin() {
             <S.SloganContainer>
               <span>Crie metas, organize seu dinheiro e gerencie seu futuro</span>
             </S.SloganContainer>
+
+            <S.ArrowDown>
+              <HashLink to={`${path.pathname}/#content`} smooth>
+                <CaretDown size={24} />
+              </HashLink>
+            </S.ArrowDown>
           </S.Hero>
 
           <FormProvider {...methods}>
-            <S.LoginContainer onSubmit={methods.handleSubmit(handleSignin, onHandleSigninError)}>
-              <h2>Crie uma nova conta</h2>
-              <S.InputsContainer>
-                <Input
-                  label="Nome"
-                  placeHolder="Digite seu nome"
-                  type="text"
-                  registerValue="name"
-                />
-                <Input
-                  label="Email"
-                  placeHolder="Digite seu email"
-                  type="email"
-                  registerValue="email"
-                />
-                <Input
-                  label="Senha"
-                  placeHolder="Digite sua senha"
-                  type="password"
-                  registerValue="password"
-                />
+            <S.LoginContainer
+              onSubmit={methods.handleSubmit(handleSignin, onHandleSigninError)}
+              id="content"
+            >
+              <S.LoginContent>
+                <h2>Crie uma nova conta</h2>
+                <S.InputsContainer>
+                  <Input
+                    label="Nome"
+                    placeHolder="Digite seu nome"
+                    type="text"
+                    registerValue="name"
+                  />
+                  <Input
+                    label="Email"
+                    placeHolder="Digite seu email"
+                    type="email"
+                    registerValue="email"
+                  />
+                  <Input
+                    label="Senha"
+                    placeHolder="Digite sua senha"
+                    type="password"
+                    registerValue="password"
+                  />
 
-                {
-                  <S.Terms>
-                    <CheckBoxInput label="Aceito os" registerValue="terms" />
-                    <a href="">Termos de uso</a>
-                  </S.Terms>
-                }
+                  {
+                    <S.Terms>
+                      <CheckBoxInput label="Aceito os" registerValue="terms" />
+                      <a href="">Termos de uso</a>
+                    </S.Terms>
+                  }
 
-                <Button text="Criar conta" />
-              </S.InputsContainer>
+                  <Button text="Criar conta" />
+                </S.InputsContainer>
 
-              <span>
-                Já tem uma conta? <Link to="/login"> Entre com ela</Link>
-              </span>
+                <span>
+                  Já tem uma conta? <Link to="/login"> Entre com ela</Link>
+                </span>
+              </S.LoginContent>
             </S.LoginContainer>
           </FormProvider>
         </S.Container>
