@@ -53,6 +53,11 @@ export const GlobalStyles = createGlobalStyle`
   body{
     background-color: ${(props) => props.theme["background"]};
     color: ${(props) => props.theme["text-secondary"]};
+    overflow: hidden;
+
+    @media screen and (max-width: 954px) {
+      overflow: auto;
+    }
   }
 
   body, input-security, textarea, button, input{

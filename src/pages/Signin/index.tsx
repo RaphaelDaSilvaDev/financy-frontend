@@ -16,6 +16,7 @@ import { AuthToken } from "../../services/authToken";
 import { Wrapper } from "../../components/Page/styles";
 import { HashLink } from "react-router-hash-link";
 import { CaretDown } from "phosphor-react";
+import { useEffect } from "react";
 
 export function Signin() {
   const path = useLocation();
@@ -56,6 +57,10 @@ export function Signin() {
       ToastStyle({ message: error.message ? error.message : "", styleToast: "warning" });
     });
   }
+
+  useEffect(() => {
+    window.scrollTo(0, 1);
+  }, []);
 
   return (
     <Page>

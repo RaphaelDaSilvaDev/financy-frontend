@@ -15,6 +15,7 @@ import { AuthToken } from "../../services/authToken";
 import { Wrapper } from "../../components/Page/styles";
 import { CaretDown } from "phosphor-react";
 import { HashLink } from "react-router-hash-link";
+import { useEffect } from "react";
 
 export function Login() {
   const [cookies, setCookies] = useCookies(["user"]);
@@ -55,6 +56,7 @@ export function Login() {
 
   return (
     <Page>
+      <meta name="apple-mobile-web-app-capable" content="yes" />
       <Wrapper>
         <S.Container>
           <S.Hero>
