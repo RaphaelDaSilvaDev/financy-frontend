@@ -60,7 +60,7 @@ export const SloganContainer = styled.span`
   }
 `;
 
-export const LoginContainer = styled.div`
+export const LoginContainer = styled.form`
   width: 80%;
   height: 100vh;
 
