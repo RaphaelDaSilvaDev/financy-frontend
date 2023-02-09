@@ -1,5 +1,5 @@
 import { Eye } from "phosphor-react";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import PlaceholderLoading from "react-placeholder-loading";
 import { Loading } from "../../../../components/Loading";
 import { Widget } from "../../../../components/Widget";
@@ -9,7 +9,11 @@ import { Title } from "./components/Title";
 import * as S from "./styles";
 
 export function ListGoals() {
-  const { goals, selectedGoal, HandleSelectGoal, loading } = useContext(HomeContext);
+  const { goals, selectedGoal, HandleSelectGoal, loading, GetGoals } = useContext(HomeContext);
+
+  useEffect(() => {
+    GetGoals();
+  }, []);
 
   return (
     <>
