@@ -30,6 +30,18 @@ export const Content = styled.div`
   }
 `;
 
+export const Avatar = styled.div`
+  width: 6.4rem;
+  height: 6.4rem;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  border-radius: 100%;
+  border: 4px solid ${(props) => props.theme["primary-light"]};
+`;
+
 export const Info = styled.div`
   display: flex;
   flex-direction: column;
