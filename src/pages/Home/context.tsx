@@ -214,7 +214,7 @@ export function HomeContextProvider({ children }: HomeProviderProps) {
   }, [entries]);
 
   useEffect(() => {
-    if (!firstRender.current && graphDetails.length !== 0) {
+    if (graphDetails.length !== 0) {
       GetGraph();
     }
   }, [selectedGoal]);

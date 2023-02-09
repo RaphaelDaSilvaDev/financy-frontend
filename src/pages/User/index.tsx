@@ -53,6 +53,7 @@ export function User() {
         token: user.token,
         user: data,
       };
+      console.log(data);
       setCookies("user", userInfo);
       ToastStyle({
         message: "Successfully updated user",
