@@ -142,7 +142,13 @@ export function CreateGoal() {
           >
             <Widget
               title={id ? "Editar Meta" : "Adicionar Meta"}
-              options={<Title title="Marcar meta como Concluída" registerValue="finishedGoal" />}
+              options={
+                id ? (
+                  <Title title="Marcar meta como Concluída" registerValue="finishedGoal" />
+                ) : (
+                  <></>
+                )
+              }
             >
               <Input
                 label="Nome da Meta"
