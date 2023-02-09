@@ -24,7 +24,6 @@ import { GoalProps } from "./interface";
 import { Title } from "./components/Title";
 
 export function CreateGoal() {
-  const firstRender = useRef(true);
   const navigation = useNavigate();
 
   const routeParams = useParams<{ [key: string]: any }>();
@@ -124,6 +123,7 @@ export function CreateGoal() {
 
   useEffect(() => {
     getAvailablePercentage();
+    window.scrollTo(0, 1);
   }, []);
 
   return (
