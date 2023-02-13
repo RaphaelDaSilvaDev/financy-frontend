@@ -3,6 +3,7 @@ import { HeaderLayout } from "../layout/HeaderLayout";
 import { CreateGoal } from "../pages/Goal";
 import { HomePage } from "../pages/Home";
 import { Login } from "../pages/Login";
+import { NotFound } from "../pages/NotFound";
 import { Signin } from "../pages/Signin";
 import { User } from "../pages/User";
 import { AuthValidation } from "../services/authValidation";
@@ -47,6 +48,7 @@ export function Routes() {
             }
           />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </ReactRoutes>
     </BrowserRouter>
   );
