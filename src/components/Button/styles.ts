@@ -19,7 +19,7 @@ export const Container = styled.button<ContainerProps>`
 
   :hover {
     background-color: ${(props) =>
-      props.typeColor === "normal" ? props.theme["primary-light"] : props.theme["danger-light"]};};
+      props.typeColor === "normal" ? props.theme["primary-light"] : props.theme["danger-light"]};
     transition: background-color 175ms;
   }
 `;
