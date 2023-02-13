@@ -1,4 +1,4 @@
-import { Menu } from "@szhsin/react-menu";
+import { Menu, MenuButton } from "@szhsin/react-menu";
 import { menuSelector, menuItemSelector } from "@szhsin/react-menu/style-utils";
 import styled from "styled-components";
 
@@ -14,12 +14,17 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
-  width: fit-content;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+`;
+
+export const ProfileContent = styled.div`
   display: flex;
   align-items: center;
   gap: 0.8rem;
-
-  cursor: pointer;
 
   & > img {
     width: 6.4rem;
@@ -94,7 +99,46 @@ export const PopUp = styled(Menu)`
 
   ${menuItemSelector.hover} {
     background-color: ${(props) => props.theme.background};
+    border-radius: 8px;
   }
+
+  ${menuItemSelector.disabled} {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  .getOut {
+    width: 100%;
+    height: 5.6rem;
+
+    background-color: ${(props) => props.theme.danger};
+    color: ${(props) => props.theme["button-text"]};
+    cursor: pointer;
+
+    border-radius: 8px;
+    border: 0;
+    outline: 0;
+
+    :hover {
+      background-color: ${(props) => props.theme["danger-light"]};
+      transition: background-color 175ms;
+    }
+  }
+`;
+
+export const PopUpButton = styled(MenuButton)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.6rem;
+
+  cursor: pointer;
+  border: none;
+  outline: none;
+
+  background-color: transparent;
+  color: #f5f5f5;
 `;
 
 export const Option = styled.div``;

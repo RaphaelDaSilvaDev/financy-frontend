@@ -17,7 +17,7 @@ import { PayloadProps, UpdateProfile } from "./services";
 import * as S from "./styles";
 
 export function User() {
-  const { user, setCookies, handleOnSignOut } = useContext(AuthContext);
+  const { user, setCookies } = useContext(AuthContext);
   const { handleToggleTheme } = useContext(ThemeContext);
 
   const [gender, setGender] = useState<any>(user?.user?.gender);
@@ -143,8 +143,6 @@ export function User() {
             <InputSwitch onChange={handleToggleTheme} />
           </S.SwitchTheme>
         </Widget>
-
-        <Button text="Sair da Conta" type="danger" onClick={handleOnSignOut} />
       </S.Container>
     </Wrapper>
   );
