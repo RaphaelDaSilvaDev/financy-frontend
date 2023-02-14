@@ -39,8 +39,8 @@ export function Header() {
       <Wrapper>
         <S.Content>
           <S.ProfileContent>
-            {user?.user?.avatar ? (
-              <img src={user.user.avatar} />
+            {user?.user?.avatar_url ? (
+              <img src={user.user.avatar_url} />
             ) : (
               <S.Avatar>
                 <User color="#FFF" size={48} />
