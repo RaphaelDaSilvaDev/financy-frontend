@@ -123,7 +123,7 @@ export const Terms = styled.div`
 
 export const ArrowDown = styled.div`
   position: absolute;
-  bottom: 4rem;
+  bottom: 8rem;
   right: 47%;
   display: none;
 

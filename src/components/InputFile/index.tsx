@@ -1,6 +1,7 @@
+import { User } from "phosphor-react";
 import { useContext, useState } from "react";
-import { render } from "react-dom";
 import { AuthContext } from "../../services/AuthContext";
+import { CropModal } from "./components/CropModal";
 import * as S from "./styles";
 
 interface InputFileProps {
@@ -10,16 +11,19 @@ interface InputFileProps {
 export function InputFile({ setAvatar }: InputFileProps) {
   const { user } = useContext(AuthContext);
   const [updateAvatar, setUpdateAvatar] = useState<string>("");
+  const [cropModal, setCropModal] = useState<JSX.Element | null>(null);
 
   function handleFile({ target }: React.ChangeEvent<HTMLInputElement>) {
     const file = target && target.files && target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setUpdateAvatar(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-      setAvatar(file);
+      setCropModal(
+        <CropModal
+          setCropModal={setCropModal}
+          setUpdateAvatar={setUpdateAvatar}
+          setAvatar={setAvatar}
+          updateAvatar={URL.createObjectURL(file)}
+        />
+      );
     }
   }
 
@@ -28,21 +32,24 @@ export function InputFile({ setAvatar }: InputFileProps) {
       <label htmlFor="UserImage">
         <span>Atualizar foto</span>
       </label>
-      <input
-        name="UserImage"
-        type="file"
-        id="UserImage"
-        accept="image/*"
-        hidden
-        onChange={handleFile}
-      />
-      {user && user.user && user.user.avatar_url && !updateAvatar ? (
-        <S.Image src={user.user.avatar_url as string} />
+
+      {user.user.avatar_url && !updateAvatar ? (
+        <S.GroupInfoImage htmlFor="image-upload">
+          <img src={user.user.avatar_url} />
+          <input id="image-upload" accept="image/*" type="file" onChange={(e) => handleFile(e)} />
+        </S.GroupInfoImage>
       ) : updateAvatar ? (
-        <S.Image src={updateAvatar} />
+        <S.GroupInfoImage htmlFor="image-upload">
+          <img src={updateAvatar} />
+          <input id="image-upload" accept="image/*" type="file" onChange={(e) => handleFile(e)} />
+        </S.GroupInfoImage>
       ) : (
-        <S.NoImage htmlFor="UserImage" />
+        <S.GroupInfoImage htmlFor="image-upload">
+          <User color="#FFF" size={56} />
+          <input id="image-upload" accept="image/*" type="file" onChange={(e) => handleFile(e)} />
+        </S.GroupInfoImage>
       )}
+      {cropModal}
     </S.Container>
   );
 }

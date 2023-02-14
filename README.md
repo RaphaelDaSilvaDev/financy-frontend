@@ -12,14 +12,9 @@
 
 ## Crie metas, organize seu dinheiro e gerencie seu futuro!
 
-- [x] Sistema de Autenticação
-- [ ] Criação de Metas
-- [ ] Listagem de Metas
-- [ ] Detalhamento de Metas
+Acesse a aplicação e comece a cuidar do seu futuro, cumpra seus objetivos de forma clara e fácil.
 
----
-
-- Esta aplicação depende do back end que pode ser encontrados <a href="https://github.com/RaphaelDaSilvaDev/financy-backend">nesse repositório</a>
+![App](https://user-images.githubusercontent.com/66075182/218799910-511112a6-5875-4cd4-8fd3-574a940d2301.png)
 
 ---
 

@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
+import { format } from "date-fns";
 import { useContext, useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { Button } from "../../components/Button";
@@ -27,7 +28,7 @@ export function User() {
     resolver: zodResolver(UserSchema),
     mode: "onSubmit",
     defaultValues: {
-      date: user.user.born || "",
+      date: format(new Date(user.user.born), "yyyy-MM-dd") || "",
     },
   });
 
@@ -92,8 +93,9 @@ export function User() {
   ];
 
   useEffect(() => {
-    method.setValue("date", user.user.born);
-  }, [user]);
+    const bornAt = format(new Date(user.user.born), "yyyy-MM-dd");
+    method.setValue("date", bornAt);
+  }, []);
 
   return (
     <Wrapper>
@@ -104,12 +106,7 @@ export function User() {
               onSubmit={method.handleSubmit(handleOnEditProfile, onErrorHandleOnEditProfile)}
             >
               <InputFile setAvatar={setAvatar} />
-              <Input
-                label="Data de Nascimento"
-                registerValue="date"
-                type="date"
-                placeHolder={user.user.born}
-              />
+              <Input label="Data de Nascimento" registerValue="date" type="date" placeHolder="" />
 
               <S.SelectContainer>
                 <label>

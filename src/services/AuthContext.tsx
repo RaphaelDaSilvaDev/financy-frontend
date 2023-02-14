@@ -18,7 +18,6 @@ interface AuthProviderProps {
 interface UserProps {
   token: string;
   user: {
-    avatar: string;
     avatar_url: string;
     born: string;
     email: string;

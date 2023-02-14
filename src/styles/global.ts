@@ -55,6 +55,8 @@ export const GlobalStyles = createGlobalStyle`
     color: ${(props) => props.theme["text-secondary"]};
     overflow: hidden;
 
+    transition: all 0.5s ease;
+
     @media screen and (max-width: 954px) {
       overflow: auto;
     }
